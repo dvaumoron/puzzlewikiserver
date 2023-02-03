@@ -1,2 +1,3 @@
 # puzzlewikiserver
-A simple implementation of a puzzlewikiservice server calling MongoDB.
+
+A simple implementation of a [puzzlewikiservice](https://github.com/dvaumoron/puzzlewikiservice) server calling [MongoDB](https://www.mongodb.com/).
