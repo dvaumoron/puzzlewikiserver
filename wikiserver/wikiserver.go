@@ -165,6 +165,7 @@ func (s server) Delete(ctx context.Context, request *pb.WikiRequest) (*pb.Respon
 
 	_, err = collection.DeleteMany(ctx, bson.D{
 		{Key: wikiIdKey, Value: request.WikiId}, {Key: wikiRefKey, Value: request.WikiRef},
+		{Key: versionKey, Value: request.Version},
 	})
 	if err != nil {
 		log.Println(mongoCallMsg, err)
