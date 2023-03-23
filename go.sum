@@ -1,8 +1,8 @@
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
-github.com/dvaumoron/puzzlegrpcserver v1.0.1 h1:Vj11s5AKjxZKjTIk3/VOUzT0sJpH8gOnmOlqyZpQlk4=
-github.com/dvaumoron/puzzlegrpcserver v1.0.1/go.mod h1:OBO9CWPuUlh4EyKPHKUAlLqDjs3Wjb1/MH0weG3JcuI=
+github.com/dvaumoron/puzzlegrpcserver v1.1.0 h1:mNWUpuhm2B/1CcO1cH9gul8IuWrorbEcBIpkQ9uMrg4=
+github.com/dvaumoron/puzzlegrpcserver v1.1.0/go.mod h1:OBO9CWPuUlh4EyKPHKUAlLqDjs3Wjb1/MH0weG3JcuI=
 github.com/dvaumoron/puzzlemongoclient v1.2.0 h1:EHNcCqglSk2EBfk9lvop294e67M8KltWDQUoUx0F34s=
 github.com/dvaumoron/puzzlemongoclient v1.2.0/go.mod h1:zfhBYSXl0S0w4EzOk3Y1fRAs18Rppd58STndDEUHG80=
 github.com/dvaumoron/puzzlewikiservice v1.3.0 h1:M2PQ5jFTcwJ8kB1FgiaUB9+PJHOIwzwNbejkYwPYpxI=
