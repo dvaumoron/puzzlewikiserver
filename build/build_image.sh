@@ -9,3 +9,5 @@ buildah config --port 50051 puzzlewikiserver-working-container
 buildah config --entrypoint '["/bin/puzzlewikiserver"]' puzzlewikiserver-working-container
 buildah commit puzzlewikiserver-working-container puzzlewikiserver
 buildah rm puzzlewikiserver-working-container
+
+buildah push puzzlewikiserver docker-daemon:puzzlewikiserver:latest
