@@ -25,7 +25,8 @@ import (
 )
 
 func main() {
-	s := grpcserver.New()
-	pb.RegisterWikiServer(s, wikiserver.New(mongoclient.Create()))
+	s := grpcserver.Make()
+	clientOptions, databaseName := mongoclient.Create()
+	pb.RegisterWikiServer(s, wikiserver.New(clientOptions, databaseName, s.Logger))
 	s.Start()
 }
