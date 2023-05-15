@@ -18,14 +18,19 @@
 package main
 
 import (
+	_ "embed"
+
 	grpcserver "github.com/dvaumoron/puzzlegrpcserver"
 	mongoclient "github.com/dvaumoron/puzzlemongoclient"
 	"github.com/dvaumoron/puzzlewikiserver/wikiserver"
 	pb "github.com/dvaumoron/puzzlewikiservice"
 )
 
+//go:embed version.txt
+var version string
+
 func main() {
-	s := grpcserver.Make()
+	s := grpcserver.Make(wikiserver.WikiKey, version)
 	clientOptions, databaseName := mongoclient.Create()
 	pb.RegisterWikiServer(s, wikiserver.New(clientOptions, databaseName, s.Logger))
 	s.Start()

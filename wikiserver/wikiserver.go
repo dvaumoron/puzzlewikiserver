@@ -23,11 +23,14 @@ import (
 
 	mongoclient "github.com/dvaumoron/puzzlemongoclient"
 	pb "github.com/dvaumoron/puzzlewikiservice"
+	"github.com/uptrace/opentelemetry-go-extra/otelzap"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"go.uber.org/zap"
 )
+
+const WikiKey = "puzzleWiki"
 
 const collectionName = "pages"
 
@@ -57,20 +60,21 @@ type server struct {
 	pb.UnimplementedWikiServer
 	clientOptions *options.ClientOptions
 	databaseName  string
-	logger        *zap.Logger
+	logger        *otelzap.Logger
 }
 
-func New(clientOptions *options.ClientOptions, databaseName string, logger *zap.Logger) pb.WikiServer {
+func New(clientOptions *options.ClientOptions, databaseName string, logger *otelzap.Logger) pb.WikiServer {
 	return server{clientOptions: clientOptions, databaseName: databaseName, logger: logger}
 }
 
 func (s server) Load(ctx context.Context, request *pb.WikiRequest) (*pb.Content, error) {
+	logger := s.logger.Ctx(ctx)
 	client, err := mongo.Connect(ctx, s.clientOptions)
 	if err != nil {
-		s.logger.Error(mongoCallMsg, zap.Error(err))
+		logger.Error(mongoCallMsg, zap.Error(err))
 		return nil, errInternal
 	}
-	defer mongoclient.Disconnect(client, s.logger, ctx)
+	defer mongoclient.Disconnect(client, logger)
 
 	collection := client.Database(s.databaseName).Collection(collectionName)
 
@@ -92,19 +96,20 @@ func (s server) Load(ctx context.Context, request *pb.WikiRequest) (*pb.Content,
 			return &pb.Content{}, nil
 		}
 
-		s.logger.Error(mongoCallMsg, zap.Error(err))
+		logger.Error(mongoCallMsg, zap.Error(err))
 		return nil, errInternal
 	}
 	return convertToContent(result), nil
 }
 
 func (s server) Store(ctx context.Context, request *pb.ContentRequest) (*pb.Response, error) {
+	logger := s.logger.Ctx(ctx)
 	client, err := mongo.Connect(ctx, s.clientOptions)
 	if err != nil {
-		s.logger.Error(mongoCallMsg, zap.Error(err))
+		logger.Error(mongoCallMsg, zap.Error(err))
 		return nil, errInternal
 	}
-	defer mongoclient.Disconnect(client, s.logger, ctx)
+	defer mongoclient.Disconnect(client, logger)
 
 	collection := client.Database(s.databaseName).Collection(collectionName)
 
@@ -118,23 +123,23 @@ func (s server) Store(ctx context.Context, request *pb.ContentRequest) (*pb.Resp
 	_, err = collection.InsertOne(ctx, page)
 	if err != nil {
 		if mongo.IsDuplicateKeyError(err) {
-
 			return &pb.Response{}, nil
 		}
 
-		s.logger.Error(mongoCallMsg, zap.Error(err))
+		logger.Error(mongoCallMsg, zap.Error(err))
 		return nil, errInternal
 	}
 	return &pb.Response{Success: true}, nil
 }
 
 func (s server) ListVersions(ctx context.Context, request *pb.VersionRequest) (*pb.Versions, error) {
+	logger := s.logger.Ctx(ctx)
 	client, err := mongo.Connect(ctx, s.clientOptions)
 	if err != nil {
-		s.logger.Error(mongoCallMsg, zap.Error(err))
+		logger.Error(mongoCallMsg, zap.Error(err))
 		return nil, errInternal
 	}
-	defer mongoclient.Disconnect(client, s.logger, ctx)
+	defer mongoclient.Disconnect(client, logger)
 
 	collection := client.Database(s.databaseName).Collection(collectionName)
 
@@ -142,25 +147,26 @@ func (s server) ListVersions(ctx context.Context, request *pb.VersionRequest) (*
 		{Key: wikiIdKey, Value: request.WikiId}, {Key: wikiRefKey, Value: request.WikiRef},
 	}, optsVersion)
 	if err != nil {
-		s.logger.Error(mongoCallMsg, zap.Error(err))
+		logger.Error(mongoCallMsg, zap.Error(err))
 		return nil, errInternal
 	}
 
 	var results []bson.M
 	if err = cursor.All(ctx, &results); err != nil {
-		s.logger.Error(mongoCallMsg, zap.Error(err))
+		logger.Error(mongoCallMsg, zap.Error(err))
 		return nil, errInternal
 	}
 	return &pb.Versions{List: mongoclient.ConvertSlice(results, convertToVersion)}, nil
 }
 
 func (s server) Delete(ctx context.Context, request *pb.WikiRequest) (*pb.Response, error) {
+	logger := s.logger.Ctx(ctx)
 	client, err := mongo.Connect(ctx, s.clientOptions)
 	if err != nil {
-		s.logger.Error(mongoCallMsg, zap.Error(err))
+		logger.Error(mongoCallMsg, zap.Error(err))
 		return nil, errInternal
 	}
-	defer mongoclient.Disconnect(client, s.logger, ctx)
+	defer mongoclient.Disconnect(client, logger)
 
 	collection := client.Database(s.databaseName).Collection(collectionName)
 
@@ -169,7 +175,7 @@ func (s server) Delete(ctx context.Context, request *pb.WikiRequest) (*pb.Respon
 		{Key: versionKey, Value: request.Version},
 	})
 	if err != nil {
-		s.logger.Error(mongoCallMsg, zap.Error(err))
+		logger.Error(mongoCallMsg, zap.Error(err))
 		return nil, errInternal
 	}
 	return &pb.Response{Success: true}, nil

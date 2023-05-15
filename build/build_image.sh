@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-go install
+./build/build.sh
 
 buildah from --name puzzlewikiserver-working-container scratch
 buildah copy puzzlewikiserver-working-container $HOME/go/bin/puzzlewikiserver /bin/puzzlewikiserver
