@@ -3,7 +3,7 @@ module github.com/dvaumoron/puzzlewikiserver
 go 1.19
 
 require (
-	github.com/dvaumoron/puzzlegrpcserver v1.4.0
+	github.com/dvaumoron/puzzlegrpcserver v1.4.1
 	github.com/dvaumoron/puzzlemongoclient v1.4.0
 	github.com/dvaumoron/puzzlewikiservice v1.3.0
 	github.com/uptrace/opentelemetry-go-extra/otelzap v0.2.0
@@ -13,7 +13,7 @@ require (
 
 require (
 	github.com/cenkalti/backoff/v4 v4.2.1 // indirect
-	github.com/dvaumoron/puzzletelemetry v1.1.0 // indirect
+	github.com/dvaumoron/puzzletelemetry v1.1.1 // indirect
 	github.com/go-logr/logr v1.2.4 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
 	github.com/golang/protobuf v1.5.3 // indirect

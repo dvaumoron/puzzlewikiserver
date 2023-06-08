@@ -60,10 +60,14 @@ github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/dvaumoron/puzzlegrpcserver v1.4.0 h1:1cFzh/P241Yfp2fJb/4p8gibeNNb5eMkm5XhDvgQNIE=
 github.com/dvaumoron/puzzlegrpcserver v1.4.0/go.mod h1:NxF1n4rDAhJ9q2idDMC8HKRwf8fR1GtqJ6DG4of5EMk=
+github.com/dvaumoron/puzzlegrpcserver v1.4.1 h1:80QHEbkBOwcK848fYzdNIj6HWg65myS9R/WvHOYqp7Q=
+github.com/dvaumoron/puzzlegrpcserver v1.4.1/go.mod h1:9332HyRIxuOUvzmKI2e6XE4lMGRjn54qBcuAig6uSF8=
 github.com/dvaumoron/puzzlemongoclient v1.4.0 h1:TYXcm+Jn3/mG+yzRfT52TzAtSu0TLbD3s9TKdH+Ia1c=
 github.com/dvaumoron/puzzlemongoclient v1.4.0/go.mod h1:j4ybZYI9/3147tIvEn+5HkM9hNhFNLXdAgRYI1HE+h8=
 github.com/dvaumoron/puzzletelemetry v1.1.0 h1:1KMOKBadHZ1vShpaXzF0fuP8B8GCm/jI2VFU3hELuys=
 github.com/dvaumoron/puzzletelemetry v1.1.0/go.mod h1:OKAkWUV8OiGm04oNhhZ32yPTp4qoTVqx4lYA5AJR78A=
+github.com/dvaumoron/puzzletelemetry v1.1.1 h1:7Cvd/VLu6PHce5lXjBSk+xyz3RJieUkXGTBTCSRo0CU=
+github.com/dvaumoron/puzzletelemetry v1.1.1/go.mod h1:OKAkWUV8OiGm04oNhhZ32yPTp4qoTVqx4lYA5AJR78A=
 github.com/dvaumoron/puzzlewikiservice v1.3.0 h1:M2PQ5jFTcwJ8kB1FgiaUB9+PJHOIwzwNbejkYwPYpxI=
 github.com/dvaumoron/puzzlewikiservice v1.3.0/go.mod h1:tPX1ONQbE/Bz19M8JLPmm/6/l5YXQVc2okbS2N9P0ns=
 github.com/envoyproxy/go-control-plane v0.9.0/go.mod h1:YTl/9mNaCwkRvm6d1a2C3ymFceY/DCBVvsKhRF0iEA4=
